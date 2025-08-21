@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <h1 id="title" data="AnimalName">Penguins</h1>
+        <p id="content">They live in extremely cold environments</p>
+
+        <button id="swapButton">Swap animal</button>
+
+        <h2>Animals</h2>
+        
+     
+        <ol id="animals">
+            
+
+        </ol>
+
+        <form id="animalForm">
+            <input type="text" id="animal" placeholder="Enter an animal name">
+            <input type="submit">
+        </form>
+        <br>
+        <button onclick="reset(event)">Reset</button>
+        
+
+        
+    </body>
+
+    <script>
+        const pi = 3.1456;
+        //Dom tree
+        //Select an element - queryselector, getElementById ✅
+        //Modify an element ✅
+        //Create an element and append it to the page ✅
+        //Bind an event listener to an element ✅
+
+
+        //select an element
+        h1= document.getElementById("title");
+        // console.log(h1.innerHTML);
+        console.log(h1.textContent);
+
+        para=document.querySelector("#content");
+        console.log(para.textContent);
+
+        //get value of attribute
+        value=h1.getAttribute('data');
+        console.log(value);
+
+
+        //modify an element
+        h1.textContent="Walruses";
+        document.querySelector('#content').innerHTML="They have pointy tusks.";
+
+
+        //bind an event listener
+        button= document.getElementById('swapButton');
+
+        function swapAnimals(){
+            if (h1.textContent == "Penguins") {
+                h1.textContent = "Walruses";
+                para.textContent = "They have pointy tusks.";
+            } else {
+                h1.textContent = "Penguins";
+                para.textContent = "They live in extremely cold environments";
+            }
+        }
+        
+        button.addEventListener('click', swapAnimals);
+
+
+        //add elements
+        function addAnimal(event){
+            event.preventDefault(); //prevent the default action of submitting form to the current url
+            //read input
+            let animal=document.querySelector('#animal').value;
+            
+            //create a new element
+            new_animal_element=document.createElement('li');
+            new_animal_element.textContent=animal;
+
+            animalsList=document.getElementById('animals');
+            animalsList.appendChild(new_animal_element);
+        }
+
+        function reset(event){
+            event.preventDefault(); 
+            animalsList=document.getElementById('animals');
+            animalsList.innerHTML="";
+        }
+
+
+        animalForm=document.querySelector('#animalForm');
+        animalForm.addEventListener('submit', addAnimal);
+
+
+
+        
+
+    </script>
+</html>
