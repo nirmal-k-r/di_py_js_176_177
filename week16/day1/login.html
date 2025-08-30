@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <div>
+            <h1>Login</h1>
+            
+            <form method="post" action="" id="loginForm"> <!-- action contains url/server route where you wanrt to submit the form to-->
+                <label>Email</label> <input type="email" name="email" id="email" required> <br><br>
+
+                <label>Password</label> <input type="password" name="password" id="password" required  disabled> <br><br>
+
+                <input type="submit" value="Register"> <br><br>
+
+            </form>
+
+       
+
+        </div>
+        
+    </body>
+
+    <script>
+        let loginForm=document.querySelector('#loginForm');
+        loginForm.addEventListener('submit', function(event){
+            event.preventDefault();
+
+            let email = document.querySelector('#email').value;
+            let password = document.querySelector('#password').value;
+
+            if (email === '' || password === '') {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Here you can add your login logic (e.g., send a request to the server)
+            console.log('Logging in with', email, password);
+        });
+
+    </script>
+
+</html>

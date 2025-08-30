@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DOM</title>
+
+        <style>
+            .searchResult{
+                color: rgb(28, 117, 21);
+                font-size: 20px;
+                list-style-type: square;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div>
+          <input type="text" id="search" placeholder="Search..." onkeyup="search()">
+        </div>
+
+        <div>
+            <ul id="results">
+                
+            </ul>
+        </div>
+
+    </body>
+
+    <script>
+
+        var products=["apple", "banana", "orange", "grape","pineapple", "mango", "kiwi"];
+
+        function search(){
+            let keyword=document.getElementById("search").value.toLowerCase();
+
+            search_results=[];
+            for (product of products){
+                if (product.toLowerCase().includes(keyword)){
+                    search_results.push(product);   
+                }
+                console.log(product);
+            }
+            displayResults(search_results);
+           
+        }
+
+
+        function displayResults(search_results){
+            ul=document.getElementById("results");
+
+            ul.innerHTML=""; //clear previous results
+            
+            for (result of search_results){
+                //create new html element
+                new_element=document.createElement("li");
+                // new_element.textContent=result;
+                // new_element.style.color="blue";
+                // new_element.className="searchResult"; //add class to the element
+                new_element.classList.add("searchResult"); //add class to the element
+                
+                anchor=document.createElement("a");
+                let value="https://www.google.com/search?q="+result;
+                anchor.setAttribute("href", value);
+                anchor.textContent=result;
+                
+                new_element.appendChild(anchor); //add the anchor to the new element
+                
+                //add it to the html
+                ul.appendChild(new_element);
+            }
+        }   
+
+    </script>
+</html>

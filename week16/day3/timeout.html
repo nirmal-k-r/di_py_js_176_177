@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Timeout</title>
+    </head>
+    <body>
+        
+        <h1>Timeout Example - Bank transfer</h1>
+
+        <input type="number" id="amount" placeholder="Enter amount">
+        <button id="process">Process</button>
+
+    </body>
+
+    <script>
+        function process_transaction(){ //business logic to be placed here
+            let amount=document.querySelector("#amount").value;
+            alert(`Transaction of MUR ${amount} has been processed.`);
+        }
+
+        button=document.getElementById("process");
+
+        button.addEventListener("click",function(event){
+            event.preventDefault();
+            //set timeout -excecutes function after time in milliseconds (5000)
+            setTimeout(process_transaction,5000); 
+        });
+
+    </script>
+
+</html>

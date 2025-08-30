@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Set interval</title>
+    </head>
+    <body>
+        <h1>Random numbers</h1>
+        <button id="generateButton">Generate</button>
+
+        <br>
+
+        <div id="area">
+
+        </div>
+    </body>
+
+    <script>
+        let generateButton=document.getElementById("generateButton");
+        let area=document.getElementById("area");
+
+        function generate_and_add(){
+            //generate an intenger between 1 and 35
+            let num=Math.floor(Math.random()*35)+1;
+
+            //create a new div element
+            let newNum=document.createElement("p");
+            newNum.textContent=num;
+
+            //append to the content area
+            area.appendChild(newNum);
+        }
+       
+        generateButton.addEventListener("click",function(event){
+            event.preventDefault();
+
+            //generate_and_add(); //generate one number immediately
+
+
+            //generate a new number each 5 seconds
+            setInterval(generate_and_add, 5000); //set interval executes the function every 5 seconds
+            
+        });
+
+
+    </script>
+
+</html>

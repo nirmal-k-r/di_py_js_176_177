@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slideshow</title>
+</head>
+    <body>
+        <h1>Slideshow</h1>
+
+        <div>
+            <button onclick="previous()">previous</button>
+            <img id="slideshow" src="" width="500">
+            <button onclick="next()">Next</button>
+        </div>
+
+        
+    </body>
+
+    <script>
+        //array of images
+        images=['https://i.ytimg.com/vi/zEr-mm8OSGo/maxresdefault.jpg', 'https://imageio.forbes.com/specials-images/imageserve/5d3703e2f1176b00089761a6/2020-Chevrolet-Corvette-Stingray/0x0.jpg?crop=4560,2565,x836,y799,safe&height=399&width=711&fit=bounds', 'https://www.autoshippers.co.uk/blog/wp-content/uploads/bugatti-centodieci-1024x576.jpg', 'https://www.spinny.com/blog/wp-content/uploads/2024/09/videoframe_0.webp']
+
+        var index=0; //global image position variable
+
+        let image= document.querySelector("#slideshow");
+        image.src=images[index]; //set initial image
+
+
+        function next(){
+            if (index>=(images.length-1)){
+                index=0;
+            }else{
+                index=index+1;
+            }
+            image.src=images[index];
+        }
+
+
+        function previous(){
+            if (index<=0){
+                index=images.length-1;
+            }else{
+                index=index-1;
+            }
+            image.src=images[index];
+        }
+
+        //shift images every 5 seconds
+        setInterval(next, 5000);
+
+    </script>
+</html>

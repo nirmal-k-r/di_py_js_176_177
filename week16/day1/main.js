@@ -31,5 +31,3 @@ firstImage=document.querySelector('#firstImage');
 firstImage.addEventListener('mouseover',imagePopup);
 
 //break 
-
-

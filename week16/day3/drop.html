@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Drag and drop</title>
+
+        <style>
+            .block1{
+                width: 100px;
+                height: 100px;
+                background-color: red;
+                position: absolute;
+                cursor: move;
+            }
+             .block2{
+                width: 100px;
+                height: 100px;
+                left:250px;
+                background-color: blue;
+                position: absolute;
+                cursor: move;
+            }
+
+            .dropzone{
+                width: 1000px;
+                height: 200px;
+                border: 2px dashed #171717;
+            }
+
+            .dropzone.hover{
+                border: 2px solid green;
+                background-color: rgba(120, 9, 164, 0.1);
+            }
+        </style>
+    </head>
+
+
+    <body>
+        <h1>Drag and drop</h1>
+
+        <section>
+            <div class="block1"  value=10 draggable="true"></div>
+            <div class="block2" value=20 draggable="true"></div>
+        </section>
+        <br> <br> <br> <br> <br> <br> <br> <br>
+        <section>
+            <div id="dropzone" class="dropzone">
+
+            </div>
+        </section>
+
+
+        <script>
+            let dropzone=document.getElementById("dropzone");
+
+            //set data on dragstart
+            document.querySelectorAll(".block1, .block2").forEach(item=>{
+                item.addEventListener("dragstart",function(event){
+                    event.dataTransfer.setData("text/plain", event.target.getAttribute("value"));
+                    console.log("set " + event.target.getAttribute("value"));
+                });
+            });
+
+            dropzone.addEventListener("dragenter",function(event){
+                event.preventDefault(); //prevent accidental drops
+                dropzone.classList.add("hover");
+            });
+
+            dropzone.addEventListener("dragleave",function(event){
+                event.preventDefault(); //prevent accidental drops
+                dropzone.classList.remove("hover");
+            });
+
+            dropzone.addEventListener("dragover",function(event){
+                event.preventDefault(); //prevent default to allow drop
+            });
+
+            dropzone.addEventListener("drop",function(event){
+                console.log('dropping');
+                event.preventDefault(); //prevent default 
+                //alert the value of the dropped element
+                x=event.dataTransfer.getData("text/plain");
+                alert("Dropped:" + x);
+                dropzone.classList.remove("hover");
+
+            });
+        </script>
+        
+    </body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Moving block</title>
+
+        <style>
+            #canvas {
+                width: 1700px;
+                height: 100px;
+                border: 2px solid rgb(35, 34, 34);
+                position: relative;
+                overflow: hidden;
+            }
+
+            #block {
+                width: 70px;
+                height: 70px;
+                background-color: rgb(195, 81, 81);
+                position: absolute;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Moving block</h1>
+
+        <label for="canvas" id="status">Paused</label>
+        <div id="canvas">
+            <div id="block"></div>
+        </div>
+
+        <br>
+
+        <div style="text-align: center;">
+            <button onclick="start()">Start</button>
+            <button onclick="pause_program()">Pause</button>
+            <button onclick="stop()">Stop</button>
+            <button onclick="reset()">Reset</button>
+        </div>
+
+    </body>
+
+
+    <script>
+        let block= document.getElementById("block");
+
+        var interval; //declare global variable interval
+
+        var pause=true;
+
+        //spawn blocks
+        reset(block);
+
+        function move(obj){ //moves object randomly to the right
+            if(pause==false){ //only move if program is not paused
+                let num=Math.floor((Math.random()*100)+1); //generate a number between 1 - 100
+                
+                console.log("Moving block to: " + obj.leftPosition);
+
+                if (obj.leftPosition<1630){ //stop moving
+                    // clearInterval(interval); //clears the set interval
+                    obj.leftPosition+=num; //update left position
+                    obj.style.left=obj.leftPosition+"px"; //update css left property
+                }else{
+                    obj.leftPosition=1630;
+                    obj.style.left=obj.leftPosition+"px";
+                    clearInterval(interval);
+                    document.getElementById("status").innerHTML = "Ended";
+                    pause=true;
+                }
+            }
+        }
+
+        function start(){
+            // setInterval(move(block), 1000, block);
+            interval = setInterval(move, 1000, block); //start moving block every 1 seconds
+            document.getElementById("status").innerHTML = "Running";
+            pause=false;
+        }
+
+        function stop(){
+            // console.log(`Stopping interval ${interval}`);
+            clearInterval(interval); //stop moving
+            document.getElementById("status").innerHTML = "Stopped";
+            pause=true;
+        }
+
+        function pause_program(){
+            //toggle state of pause
+            if (pause){
+                pause=false;
+            }else{
+                pause=true;
+            }
+
+            document.getElementById("status").innerHTML = pause ? "Paused" : "Running";
+        }
+
+
+        function reset(){
+            clearInterval(interval); //stop moving
+            reset_object(block);
+            document.getElementById("status").innerHTML = "Paused";
+            pause=true;
+        }
+
+        function reset_object(obj){
+            obj.style.left = "5px";
+            obj.style.top = "15px";
+
+            obj.leftPosition=5;
+            obj.topPosition=15;
+        }
+        
+    </script>
+</html>
